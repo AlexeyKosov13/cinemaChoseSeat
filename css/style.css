@@ -467,7 +467,7 @@ body {
 
 .index-header {
   min-height: 100vh;
-  background: linear-gradient(180deg, rgba(98, 20, 2, 0.31) 0%, #621402 85.62%), url(/img/bgsite.jpg) no-repeat center top/cover;
+  background: linear-gradient(180deg, rgba(98, 20, 2, 0.31) 0%, #621402 85.62%), url(../img/bgsite.jpg) no-repeat center top/cover;
 }
 
 .wrapper {
@@ -561,7 +561,7 @@ body {
 
 .main-header {
   min-height: 100vh;
-  background: linear-gradient(180deg, rgba(98, 20, 2, 0.31) 0%, #621402 85.62%), url(/img/bg.jpg) no-repeat center top/cover;
+  background: linear-gradient(180deg, rgba(98, 20, 2, 0.31) 0%, #621402 85.62%), url(../img/bg.jpg) no-repeat center top/cover;
 }
 
 .header {
