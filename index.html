@@ -11,45 +11,93 @@
     <div class="wrapper">
         <div class="index-header">
             <header>
-    <div class="header-nav _container">
-        <div class="header">
-            <a href="/" class="logo">
-                <img src="img/logo.png" alt="logo"></a>
-            <nav class="nav">
-                <ul class="menu">
-                    <li class="menu-item">
-                        <a href="index.html" class="menu-link">Главная</a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="filmindex.html" class="menu-link">Фильмы</a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#" class="menu-link">Кинотеатры</a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#" class="menu-link">События</a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#" class="menu-link">Поддержка</a>
-                    </li>
-                </ul>
-            </nav>
-    
-            <div class="user">
-                <span class="user-name">Привет, Алекс</span>
-                <img src="img/avatar.jpg" alt="avatar" class="user-avatar">
-            </div>
-        </div>
-        
+                <div class="header-nav _container">
+                    <div class="header">
+                        <a href="/" class="logo">
+                            <img src="img/logo.png" alt="logo"></a>
+                        <nav class="nav">
+                            <ul class="menu">
+                                <li class="menu-item">
+                                    <a href="index.html" class="menu-link">Главная</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="movies.html" class="menu-link">Фильмы</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="cinema.html" class="menu-link">Кинотеатры</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="filmgame.html" class="menu-link">игра</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" class="menu-link">Поддержка</a>
+                                </li>
+                            </ul>
+                        </nav>
+                
+                        <div class="user">
+                            <span class="user-name">Привет, Алекс</span>
+                            <img src="img/avatar.jpg" alt="avatar" class="user-avatar">
+                        </div>
+                    </div>
+                    
+                </div>
+            </header>
+            <main>
+                <div class="main _container">
+                    <div class="index-main">
+                        <h1>Сегодня в кино</h1>
+                        <div class="carousel-film">
+                            <div class="slider">
+                                <div class="item">
+                                    <img class="slider-img" src="img/slider/spider.jpg" alt="Первый слайд">
+                                    <div class="slideText">
+                                        <h2 class="slide-title">Человек-паук: Нет пути домой (2021)</h2>
+                                        <p class="slide-subtitle">Жизнь и репутация Питера Паркера оказываются под угрозой, поскольку Мистерио раскрыл всему миру тайну личности Человека-паука. Пытаясь исправить ситуацию, Питер обращается за помощью к Стивену Стрэнджу, но вскоре всё становится намного опаснее.</p>
+                                        <a href="filmindex.html" class="bay-ticket button button-pay">купить билет</a>
+                                    </div>
+                                </div>
+                            
+                                <div class="item">
+                                    <img class="slider-img" src="img/slider/matrix.jpg" alt="Второй слайд">
+                                    <div class="slideText">
+                                        <h2 class="slide-title">Матрица: Воскрешение (2021)</h2>
+                                        <p class="slide-subtitle">В двух реальностях Нео снова придется выбирать, следовать ли за белым кроликом. Выбор, пусть и иллюзорный, все еще остается единственным путем в Матрицу или из нее, что более опасно, чем когда-либо.</p>
+                                        <a href="filmindex.html" class="bay-ticket button button-pay">купить билет</a>    
+                                    </div>
+                                </div>
+                            
+                                <div class="item">
+                                    <img class="slider-img" src="img/slider/ghost.jpg" alt="Третий слайд">
+                                    <div class="slideText">
+                                        <h2 class="slide-title">Охотники за привидениями: Наследники (2021)</h2>
+                                        <p class="slide-subtitle">Мать-одиночка с двумя детьми-подростками селится на старой ферме в Оклахоме, полученной в наследство от отца, которого она не знала. Дети пытаются больше узнать о своем деде и находят автомобиль Ecto-1, принадлежавший знаменитым охотникам за привидениями.</p>
+                                        <a href="filmindex.html" class="bay-ticket button button-pay">купить билет</a>
+                                    </div>
+                                </div>
+                            
+                                <a class="prev" onclick="minusSlide()">&#10094;</a>
+                                <a class="next" onclick="plusSlide()">&#10095;</a>
+                            </div>
+                            
+                            <div class="slider-dots">
+                                <span class="slider-dots_item" onclick="currentSlide(1)"></span> 
+                                <span class="slider-dots_item" onclick="currentSlide(2)"></span> 
+                                <span class="slider-dots_item" onclick="currentSlide(3)"></span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <section>
+                <div class="news _container">
+                    <h2 class="title">Новости кино</h2>
+                    
+                </div>
+            </section>
+        </div>    
     </div>
-</header>
-            
     
-        </div>
-        
-        
-        
-    </div>
    
     <!-- <div class="modalWindow">
         <div class="modal-content">

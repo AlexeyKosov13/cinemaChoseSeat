@@ -19,6 +19,60 @@ var isMobile = {
     }
 };
 
+// ============слайдер==================
+
+/* Индекс слайда по умолчанию */
+let slideIndex = 1;
+showSlides(slideIndex);
+
+/* Функция увеличивает индекс на 1, показывает следующй слайд*/
+function plusSlide() {
+    showSlides(slideIndex += 1);
+}
+
+/* Функция уменьшяет индекс на 1, показывает предыдущий слайд*/
+function minusSlide() {
+    showSlides(slideIndex -= 1);  
+}
+
+/* Устанавливает текущий слайд */
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+/* Основная функция слайдера */
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("item");
+    let dots = document.getElementsByClassName("slider-dots_item");
+    if (n > slides.length) {
+      slideIndex = 1
+    }
+    if (n < 1) {
+        slideIndex = slides.length
+    }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+}
+
+let timer = setInterval(function(){
+    slideIndex++;
+    showSlides(slideIndex);
+}, 5000);
+
+//================================
+
+//========== API kinopoisk=========
+
+
+
+
 
 
 //проверка на поддержку webp
@@ -133,21 +187,6 @@ var isMobile = {
         
 // }
     
-// //====================/yandexMaps=======================
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const schemeSvg = document.querySelector('.scheme-svg');
-    const priceTotal = document.querySelector('.price-total');
-    let cost = 500;
-    let totalPrice = 0;
-    schemeSvg.addEventListener('click', (event) => {
-        if (!event.target.classList.contains('booked')&& (event.target.matches('path'))) {
-            event.target.classList.toggle('active');
-            totalPrice = cost*schemeSvg.querySelectorAll('.active').length;
-            priceTotal.textContent = totalPrice;
-        }
-        
-    });
-    
-});
+
