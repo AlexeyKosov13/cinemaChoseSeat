@@ -32,6 +32,7 @@ async function getMovie(url) {
   showModal(respData);
 };
 
+// подсветка круга в зависимости от рейтинга
 function getClassByRate(vote) {
   if (vote > 7) {
     return "green";
@@ -105,17 +106,15 @@ window.addEventListener("click", function (event) {
   if (event.target.closest('.card')) {
     const filmId = event.target.getAttribute('data-id');
     const filmItem = `${API_FILM_INFO}${filmId}`;
-    
-    getMovie(filmItem);
-     
-  };
 
+    getMovie(filmItem); 
+  };
 });
 
 //рендер модального окна
 function showModal(item) {
-  console.log(item);
   const parentFilm = document.querySelector('.main__films');
+
   let modalFilm = `
     <div class="modalWindow">
       <div class="modal-content">
@@ -125,8 +124,9 @@ function showModal(item) {
           </div>
           <div class="popup_text popup_block">
             <h3 class="text_title">${item.nameRu}</h3>
-            <h4 class="text_title_original">${item.nameOriginal}
+            <h4 class="text_title_original">${item.nameOriginal?item.nameOriginal:''}
               </h4>
+            <p class="text_raiting"><span class="text_text">Рейтинг: </span>${item.ratingKinopoisk}</p>
             <p class="text_description"><span class="text_text">Описание: </span>${item.description}</p>
             <p class="text_genre"><span class="text_text">Жанр: </span>${item.genres.map((genre, index) => {
               if (index < 3) {
@@ -140,7 +140,7 @@ function showModal(item) {
     `;
 
     parentFilm.innerHTML += modalFilm;
-
+  console.log(modalFilm);
   //закрытие модального окна
   const closeBtn = document.querySelector('.close_btn');
   const modal = document.querySelector('.modalWindow');
