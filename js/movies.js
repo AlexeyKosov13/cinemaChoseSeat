@@ -4,7 +4,7 @@ const API_URL_POULAR =
 const API_URL_SEARCH =
   "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=";
 const API_FILM_INFO = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
-const titleSearch = document.querySelector('.title__films');
+
 
 getMovies(API_URL_POULAR);
 
@@ -89,6 +89,8 @@ const search = document.querySelector(".form__search");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const apiSearchUrl = `${API_URL_SEARCH}${search.value}`;
+  const titleSearch = document.querySelector('.title__films');
+  
   if (search.value) {
     getMovies(apiSearchUrl);
     }
@@ -113,7 +115,7 @@ window.addEventListener("click", function (event) {
 
 //рендер модального окна
 function showModal(item) {
-  const parentFilm = document.querySelector('.main__films');
+  const parentFilm = document.querySelector('.movies');
 
   let modalFilm = `
     <div class="modalWindow">
@@ -140,18 +142,21 @@ function showModal(item) {
     `;
 
     parentFilm.innerHTML += modalFilm;
-  console.log(modalFilm);
+  
   //закрытие модального окна
   const closeBtn = document.querySelector('.close_btn');
   const modal = document.querySelector('.modalWindow');
     closeBtn.addEventListener('click', () => {
       parentFilm.innerHTML -= modalFilm;
+      getMovies(API_URL_POULAR);
+      
     });
   
     modal.addEventListener("click", (e) => {
       // закрытие по щелчку на пустом поле
       if (e.target === modal) {
         parentFilm.innerHTML -= modalFilm;
+        getMovies(API_URL_POULAR);
       }
     });
   
@@ -159,8 +164,10 @@ function showModal(item) {
       // закрытие клавишей escape
       if (e.code === "Escape") {
         parentFilm.innerHTML -= modalFilm;
+      getMovies(API_URL_POULAR);
       }
     });
+  
 };
 
 
