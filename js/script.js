@@ -70,122 +70,104 @@ let timer = setInterval(function(){
 
 //========== API kinopoisk=========
 
+const API_KEY = "e6a4b61f-9c7a-4d61-a717-91be7d5b71b7";
 
+const today = new Date();
+const month = (today.toLocaleString('en-US', { month: 'long' })).toUpperCase();
 
+const year = today.getFullYear();
+const API_PREMIERES = `https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2022&month=${month}`;
 
+let slideCount = 0;
 
+getMovies(API_PREMIERES);
 
-//проверка на поддержку webp
-// function testWebP(callback) {
-
-//     var webP = new Image();
-//     webP.onload = webP.onerror = function () {
-//     callback(webP.height == 2);
-//     };
-//     webP.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
-//     }
+async function getMovies(url) {
+    const resp = await fetch(url, {
+      method: "GET",
+      headers: {
+        "X-API-KEY": API_KEY,
+        "Content-Type": "application/json",
+      },
+    });
+    const respData = await resp.json();
+    premieres(respData,slideCount);
     
-//     testWebP(function (support) {
-    
-//     if (support == true) {
-//     document.querySelector('body').classList.add('webp');
-//     }else{
-//     document.querySelector('body').classList.add('no-webp');
-//     }
-//     });
+};
 
-// window.onload = function () {
-//     document.addEventListener('click', documentActions);
+// ==== показ блока премьеры =====
 
-//     function documentActions(a) {
-//         const targetElement = a.target;
-//         if (window.innerWidth > 768 && isMobile.any()) {
-//             if (targetElement.classList.contains('menu_arrow')) {
-//                 targetElement.closest('.menu_item').classList.toggle('_hover');
-//             }
-//             if (!targetElement.closest('.menu_item') && document.querySelectorAll('.menu_item._hover').length > 0) {
-//                 _removeClasses(document.querySelectorAll('.menu_item._hover'), '_hover');
-//             }
-    
-//         }
-//         if (targetElement.classList.contains('search-form_icon')) {
-//             document.querySelector('.search_form').classList.toggle('_active');
-//         }
-//     }
-// }
+function premieres(data,count) {
+    const moviesEl = document.querySelector(".premier__block");
+  
+    moviesEl.innerHTML = "";
+
+    data.items.forEach((movie, index) => {
+        if (index > count && index < (count+6)) {
+            const movieEl = document.createElement("div");
+            movieEl.classList.add("premier_movie");
+            movieEl.classList.add("premier_img");
+            movieEl.innerHTML = `
+                <div  class="premier_card">
+                  <div class="premier__cover--inner">
+                      <img src='${movie.posterUrlPreview}' alt="${movie.nameRu}" class="premier__cover">
+                      <div class="premier__cover--darkened" data-id="${movie.filmId}"></div>
+                  </div>
+                  <div class="premier__info">
+                      <div class="premier__title">${movie.nameRu}</div>
+                      <div class="premier__category">${movie.year}, ${movie.genres.map((genre, index) => {
+                        if (index < 2) {
+                          return `${genre.genre}`;
+                            }
+                        })}
+                      </div>
+                       
+                    </div>
+                </div>
+                `;
+            moviesEl.appendChild(movieEl); 
+      }     
+    });
+    if (slideCount == 0) {
+        prevBtn.classList.add('btn_hide');
+    } else {
+        prevBtn.classList.remove('btn_hide');
+        prevBtn.classList.add('btn_show');
+    }
+};
+
+const nextBtn = document.querySelector('.premier__btn_next');
+const prevBtn = document.querySelector('.premier__btn_prev');
+
+//прокрутка блока премьер
+nextBtn.addEventListener('click', () => {
+    slideCount += 3;
+    getMovies(API_PREMIERES);
+});
+
+prevBtn.addEventListener('click', () => { 
+    --slideCount;
+    getMovies(API_PREMIERES);
+    if (slideCount == 0) {
+        prevBtn.classList.remove('btn_show');
+        prevBtn.classList.add('btn_hide');
+    }
+    console.log(slideCount);
+});
+
+
+
+
+
 
 // //====================popup==================
-// let modal = document.querySelector('.modalWindow');
-// let img = document.querySelectorAll('.popup_img');
-// let close = document.querySelector('.close');
-// let popup = document.querySelector('.popup');
 
-// for (let i = 0; i < img.length; i++) {
-//     img[i].addEventListener('click', function(){
-//         modal.style.display = 'block';
-//         popup.src = this.id;
-//     });  
-// }
-// close.onclick = function () {
-//     modal.style.display = 'none';
-// }
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//       modal.style.display = "none";
-//     }
-// }
-  
-// //===========================
 
-// //=======yadex_maps=========
 
-// ymaps.ready(init);
-//     function init(){
-//         var myMap = new ymaps.Map("map", {
-//             center: [55.76, 37.64],
-//             zoom: 7,
-//             controls: ['zoomControl'],
-//             behaviors: ['drag']
-//         });
-//        //============ IconPlacemark ===============
-       
-//     //    MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
-//     //     '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
-//     // ),
 
     
 
 
-//         //============ geoObject ==================
-//         var myadress = document.querySelector('.myadress').innerHTML;
-//         console.log(myadress);
-//         ymaps.geocode(myadress, {
-//             results: 1
-//         }).then(function (res) {        
-//                 var firstGeoObject = res.geoObjects.get(0),        
-//                     coords = firstGeoObject.geometry.getCoordinates(),       
-//                     bounds = firstGeoObject.properties.get('boundedBy');
-//                 firstGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
-//                 firstGeoObject.properties.set('iconCaption', firstGeoObject.getAddressLine());
-//             myPlacemark = new ymaps.Placemark(firstGeoObject.geometry.getCoordinates(), {
-//                 hintContent: 'Собственный значок метки',
-//                 balloonContent: 'Это красивая метка'
-//             }, { 
-//                 iconLayout: 'default#image',
-//                 iconImageHref: '../img/baloon.png',
-//                 iconImageSize: [60, 60],
-//                 iconImageOffset: [-40, -38]
-//             }),
-//             myMap.geoObjects
-//                 .add(myPlacemark);
-
-//                 myMap.setBounds(bounds, { 
-//                     checkZoomRange: true
-//                 });
-//         });
-        
-        
-// }
     
 
 

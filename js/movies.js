@@ -1,12 +1,12 @@
 const API_KEY = "e6a4b61f-9c7a-4d61-a717-91be7d5b71b7";
 const API_URL_POULAR =
-  "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1";
+  "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=";
 const API_URL_SEARCH =
   "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=";
 const API_FILM_INFO = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
+let pageNum = 1;
 
-
-getMovies(API_URL_POULAR);
+getMovies(API_URL_POULAR+pageNum);
 
 async function getMovies(url) {
   const resp = await fetch(url, {
@@ -32,6 +32,34 @@ async function getMovie(url) {
   showModal(respData);
 };
 
+//===========переключение страниц=========
+const next = document.querySelector('.button_next');
+const prev = document.querySelector('.button_prev');
+
+next.addEventListener('click', (e) => {
+  ++pageNum;
+  // скрытие кнопики prev на первой странице
+  if (pageNum > 1) {
+    prev.classList.remove('btn_hide');
+    prev.classList.add('btn_show');
+  }
+  const page = API_URL_POULAR + pageNum;
+  getMovies(page);
+  window.scroll(0, 120);
+});
+// нажатие на укнопку prev
+prev.addEventListener('click', (e) => {
+  --pageNum;
+  if (pageNum < 2) {
+    prev.classList.remove('btn_show');
+    prev.classList.add('btn_hide');
+  }
+  const page = API_URL_POULAR + pageNum;
+  getMovies(page);
+  window.scroll(0, 120);
+});
+
+
 // подсветка круга в зависимости от рейтинга
 function getClassByRate(vote) {
   if (vote > 7) {
@@ -46,7 +74,7 @@ function getClassByRate(vote) {
 function showMovies(data) {
   const moviesEl = document.querySelector(".movies");
   
-  document.querySelector(".movies").innerHTML = "";
+  moviesEl.innerHTML = "";
 
   data.films.forEach((movie) => {
     const movieEl = document.createElement("div");
@@ -98,78 +126,63 @@ form.addEventListener("submit", (e) => {
     search.value = "";   
 });
 
-
-
 //====================popup==================
-
 
 //модальное окно по клику на постер
 window.addEventListener("click", function (event) {
   if (event.target.closest('.card')) {
     const filmId = event.target.getAttribute('data-id');
     const filmItem = `${API_FILM_INFO}${filmId}`;
-
     getMovie(filmItem); 
   };
 });
 
 //рендер модального окна
 function showModal(item) {
-  const parentFilm = document.querySelector('.movies');
-
-  let modalFilm = `
-    <div class="modalWindow">
-      <div class="modal-content">
-        <span class="close_btn">&times;</span>
-          <div class="popup_block popup_img">
-            <img src="${item.posterUrlPreview}" alt="${item.nameRu}" class="popup_poster">
-          </div>
-          <div class="popup_text popup_block">
-            <h3 class="text_title">${item.nameRu}</h3>
-            <h4 class="text_title_original">${item.nameOriginal?item.nameOriginal:''}
-              </h4>
-            <p class="text_raiting"><span class="text_text">Рейтинг: </span>${item.ratingKinopoisk}</p>
-            <p class="text_description"><span class="text_text">Описание: </span>${item.description}</p>
-            <p class="text_genre"><span class="text_text">Жанр: </span>${item.genres.map((genre, index) => {
-              if (index < 3) {
-                return `${genre.genre}`;
-              }
-            })}</p>
-            <p class="text_year"><span class="text_text">Год производства: </span>${item.year}</p>
-          </div>               
-      </div>    
-    </div>
-    `;
-
-    parentFilm.innerHTML += modalFilm;
-  
-  //закрытие модального окна
-  const closeBtn = document.querySelector('.close_btn');
   const modal = document.querySelector('.modalWindow');
-    closeBtn.addEventListener('click', () => {
-      parentFilm.innerHTML -= modalFilm;
-      getMovies(API_URL_POULAR);
-      
-    });
-  
-    modal.addEventListener("click", (e) => {
-      // закрытие по щелчку на пустом поле
-      if (e.target === modal) {
-        parentFilm.innerHTML -= modalFilm;
-        getMovies(API_URL_POULAR);
+  const closeBtn = document.querySelector('.close_btn');
+  const poster = document.querySelector('.modal_poster');
+  const title = document.querySelector('.text_title');
+  const original = document.querySelector('.text_title_original');
+  const rating = document.querySelector('.text_raiting');
+  const description = document.querySelector('.text_description');
+  const genre = document.querySelector('.text_genre');
+  const year = document.querySelector('.text_year');
+  modal.classList.remove('hide');
+  modal.classList.add('show');
+  let genresList = item.genres.map((genre, index) => {
+    if (index < 3) {
+        return `${genre.genre}`;
       }
-    });
-  
-    document.addEventListener("keydown", (e) => {
-      // закрытие клавишей escape
-      if (e.code === "Escape") {
-        parentFilm.innerHTML -= modalFilm;
-      getMovies(API_URL_POULAR);
-      }
-    });
-  
+    })
+  poster.src = item.posterUrlPreview;
+  title.innerHTML = item.nameRu;
+  original.innerHTML = item.nameOriginal;
+  rating.innerHTML = item.ratingKinopoisk;
+  description.innerHTML = item.description;
+  genre.innerHTML = genresList;
+  year.innerHTML = item.year;
+  //закрытие модального окна
+  closeBtn.addEventListener('click', () => {
+    modal.classList.remove('show');
+    modal.classList.add('hide');   
+  }); 
+  modal.addEventListener("click", (e) => {
+    // закрытие по щелчку на пустом поле
+    if (e.target === modal) {
+      modal.classList.remove('show');
+      modal.classList.add('hide');     
+    }
+  }); 
+  document.addEventListener("keydown", (e) => {
+    // закрытие клавишей escape
+    if (e.code === "Escape") {
+      modal.classList.remove('show');
+      modal.classList.add('hide');    
+    }
+  });  
 };
-
-
   
-//===========================
+
+
+
