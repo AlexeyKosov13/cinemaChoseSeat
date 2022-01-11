@@ -19,6 +19,34 @@ var isMobile = {
     }
 };
 
+
+//=============menu burger==============
+
+window.onload = function () {
+    document.addEventListener("click", documentActions);
+  
+    function documentActions(a) {
+      const targetElement = a.target;
+      if (window.innerWidth > 768 && isMobile.any()) {
+        if (targetElement.classList.contains("menu_arrow")) {
+          targetElement.closest(".menu_item").classList.toggle("_hover");
+        }
+        if (
+          !targetElement.closest(".menu_item") &&
+          document.querySelectorAll(".menu_item._hover").length > 0
+        ) {
+          _removeClasses(
+            document.querySelectorAll(".menu_item._hover"),
+            "_hover"
+          );
+        }
+      }
+      if (targetElement.classList.contains("search-form_icon")) {
+        document.querySelector(".search_form").classList.toggle("_active");
+      }
+    }
+  };
+
 // ============слайдер==================
 
 /* Индекс слайда по умолчанию */
@@ -114,7 +142,7 @@ function premieres(data,count) {
                       <div class="premier__cover--darkened" data-id="${movie.filmId}"></div>
                   </div>
                   <div class="premier__info">
-                      <div class="premier__title">${movie.nameRu}</div>
+                      <div class="premier__info_title">${movie.nameRu}</div>
                       <div class="premier__category">${movie.year}, ${movie.genres.map((genre, index) => {
                         if (index < 2) {
                           return `${genre.genre}`;
