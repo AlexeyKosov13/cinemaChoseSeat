@@ -22,30 +22,16 @@ var isMobile = {
 
 //=============menu burger==============
 
-window.onload = function () {
-    document.addEventListener("click", documentActions);
+let contain = document.getElementById("contain");
+
+contain.addEventListener("click", openNaw);
+
+function openNaw() {
+  let element = document.getElementById("nav");
+  element.classList.toggle("open");
   
-    function documentActions(a) {
-      const targetElement = a.target;
-      if (window.innerWidth > 768 && isMobile.any()) {
-        if (targetElement.classList.contains("menu_arrow")) {
-          targetElement.closest(".menu_item").classList.toggle("_hover");
-        }
-        if (
-          !targetElement.closest(".menu_item") &&
-          document.querySelectorAll(".menu_item._hover").length > 0
-        ) {
-          _removeClasses(
-            document.querySelectorAll(".menu_item._hover"),
-            "_hover"
-          );
-        }
-      }
-      if (targetElement.classList.contains("search-form_icon")) {
-        document.querySelector(".search_form").classList.toggle("_active");
-      }
-    }
-  };
+  contain.classList.toggle("change");
+}
 
 // ============слайдер==================
 

@@ -182,6 +182,20 @@ function showModal(item) {
     }
   });  
 };
+
+//=============menu burger==============
+
+let contain = document.getElementById("contain");
+
+contain.addEventListener("click", openNaw);
+
+function openNaw() {
+  let element = document.getElementById("nav");
+  element.classList.toggle("open");
+  
+  contain.classList.toggle("change");
+}
+
   
 
 
