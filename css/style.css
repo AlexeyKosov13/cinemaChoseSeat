@@ -1378,15 +1378,21 @@ height: 100%;
 .btn_show {
   visibility: visible;
 }
+.premier__wrapper {
+  overflow: hidden;
+  width: 1200px;
+}
 .premier__block{
+  overflow: hidden;
   display: flex;
   height: 400px;
-  justify-content: space-between;
+  width: 5000%;
+  
 }
 .premier_card {
   display: flex;
   flex-direction: column;
-  margin-right: 10px;
+  margin-right: 40px;
   width: 200px;
 }
 

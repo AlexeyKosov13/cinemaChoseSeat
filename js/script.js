@@ -91,8 +91,11 @@ const month = (today.toLocaleString('en-US', { month: 'long' })).toUpperCase();
 
 const year = today.getFullYear();
 const API_PREMIERES = `https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2022&month=${month}`;
-
-let slideCount = 0;
+let premierBlock = document.querySelector('.premier__block');
+let premierWrapper = document.querySelector('.premier__wrapper');
+const width = window.getComputedStyle(premierBlock).width;
+let movieIndex = 1;
+let offset = 0;
 
 getMovies(API_PREMIERES);
 
@@ -105,8 +108,7 @@ async function getMovies(url) {
       },
     });
     const respData = await resp.json();
-    premieres(respData,slideCount);
-    
+    premieres(respData,movieIndex);
 };
 
 // ==== показ блока премьеры =====
@@ -117,7 +119,7 @@ function premieres(data,count) {
     moviesEl.innerHTML = "";
 
     data.items.forEach((movie, index) => {
-        if (index > count && index < (count+6)) {
+        
             const movieEl = document.createElement("div");
             movieEl.classList.add("premier_movie");
             movieEl.classList.add("premier_img");
@@ -139,10 +141,9 @@ function premieres(data,count) {
                     </div>
                 </div>
                 `;
-            moviesEl.appendChild(movieEl); 
-      }     
+            moviesEl.appendChild(movieEl);     
     });
-    if (slideCount == 0) {
+    if (offset == 0) {
         prevBtn.classList.add('btn_hide');
     } else {
         prevBtn.classList.remove('btn_hide');
@@ -150,23 +151,36 @@ function premieres(data,count) {
     }
 };
 
+function deleteNotDigits(str) {
+    return +str.replace(/\D/g, '');
+};
+
 const nextBtn = document.querySelector('.premier__btn_next');
 const prevBtn = document.querySelector('.premier__btn_prev');
 
 //прокрутка блока премьер
 nextBtn.addEventListener('click', () => {
-    slideCount += 3;
-    getMovies(API_PREMIERES);
+    offset += 200;
+    premierBlock.style.transform = `translateX(-${offset}px)`;
+    if (offset == 0) {
+        prevBtn.classList.remove('btn_show');
+        prevBtn.classList.add('btn_hide');
+    } else {
+        prevBtn.classList.remove('btn_hide');
+        prevBtn.classList.add('btn_show');
+    }
+    console.log(offset);
 });
 
 prevBtn.addEventListener('click', () => { 
-    --slideCount;
-    getMovies(API_PREMIERES);
-    if (slideCount == 0) {
+    offset -= 200;
+    premierBlock.style.transform = `translateX(-${offset}px)`;
+
+    if (offset == 0) {
         prevBtn.classList.remove('btn_show');
         prevBtn.classList.add('btn_hide');
     }
-    console.log(slideCount);
+    console.log(offset);
 });
 
 
