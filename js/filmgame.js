@@ -2,7 +2,7 @@ const quizData = [
     {
         img: '/img/1.jpg',
         img2: '/img/11.jpg',
-        question: "What does HTML stand for?",
+        
         a: "Молчание ягнят",
         b: "Зеленая миля",
         c: "Побег из Шоушенка",
@@ -11,7 +11,7 @@ const quizData = [
     {
         img: '/img/2.jpg',
         img2: '/img/22.jpg',
-        question: "What does CSS stand for?",
+        
         a: "Карты, деньги, два ствола",
         b: "Достучаться до небес",
         c: "Большой куш",
@@ -20,7 +20,7 @@ const quizData = [
     {
         img: '/img/3.jpg',
         img2: '/img/33.jpg',
-        question: "What year did JavaScript appear?",
+        
         a: "Техасская резня бензопилой",
         b: "Ночь в музее",
         c: "Остров проклятых",
@@ -29,7 +29,7 @@ const quizData = [
     {
         img: '/img/4.jpg',
         img2: '/img/44.jpg',
-        question: "Who is the author of the JavaScript language?",
+        
         a: "Назад в будущее 1",
         b: "Назад в будущее 2",
         c: "Назад в будущее 3",
@@ -38,7 +38,7 @@ const quizData = [
     {
         img: '/img/5.jpg',
         img2: '/img/55.jpg',
-        question: "What language is this project written in?",
+        
         a: "Одержимость",
         b: "Социальная сеть",
         c: "Человек-паук",
@@ -81,7 +81,7 @@ function startGame() {
     loadQuiz();
 
     function loadQuiz() {
-        timeEnd = 30000;
+        timeEnd = 300;
         //deselectAnswers();
         //получаем обьект из массива
         currentQuizData = quizData[currentQuiz];
