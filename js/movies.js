@@ -1,14 +1,15 @@
 const API_KEY = "e6a4b61f-9c7a-4d61-a717-91be7d5b71b7";
-const API_URL_POULAR =
+let API_URL_POULAR =
   "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=";
 const API_URL_SEARCH =
   "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=";
 const API_FILM_INFO = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
 let pageNum = 1;
+const titleSearch = document.querySelector('.title__films');
 
-getMovies(API_URL_POULAR+pageNum);
+getMovies(API_URL_POULAR+pageNum,showMovies);
 
-async function getMovies(url) {
+async function getMovies(url,func) {
   const resp = await fetch(url, {
     method: "GET",
     headers: {
@@ -17,7 +18,7 @@ async function getMovies(url) {
     },
   });
   const respData = await resp.json();
-  showMovies(respData);
+  func(respData);
 };
 
 async function getMovie(url) {
@@ -32,6 +33,23 @@ async function getMovie(url) {
   showModal(respData);
 };
 
+//========выбор списков=============
+const topList = document.querySelector('.top__list');
+topList.addEventListener('change', () => {
+  function getTop(item, text) {
+    if (topList.value == item) {
+      API_URL_POULAR = `https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=${topList.value}&page=`;
+      getMovies(API_URL_POULAR + pageNum,showMovies);
+      titleSearch.innerHTML = text;
+    };
+  };
+  getTop("TOP_100_POPULAR_FILMS", "Топ 100 популярных фильмов");
+  getTop("TOP_250_BEST_FILMS", "Топ 250 лучших фильмов");
+  getTop("TOP_AWAIT_FILMS","Топ ожидания")
+  
+  
+});
+
 //===========переключение страниц=========
 const next = document.querySelector('.button_next');
 const prev = document.querySelector('.button_prev');
@@ -44,7 +62,7 @@ next.addEventListener('click', (e) => {
     prev.classList.add('btn_show');
   }
   const page = API_URL_POULAR + pageNum;
-  getMovies(page);
+  getMovies(page, showMovies);
   window.scroll(0, 120);
 });
 // нажатие на укнопку prev
@@ -55,7 +73,7 @@ prev.addEventListener('click', (e) => {
     prev.classList.add('btn_hide');
   }
   const page = API_URL_POULAR + pageNum;
-  getMovies(page);
+  getMovies(page,showMovies);
   window.scroll(0, 120);
 });
 
@@ -71,9 +89,62 @@ function getClassByRate(vote) {
   }
 };
 
+//============переключение режима просмотра=========
+
+const buttonList = document.querySelector('.button__list');
+const buttonTable = document.querySelector('.button__table');
+
+buttonList.addEventListener('click', () => {
+  getMovies(API_URL_POULAR + pageNum, showMoviesList);
+})
+buttonTable.addEventListener('click', () => {
+  getMovies(API_URL_POULAR + pageNum, showMovies);
+})
+
+
+function showMoviesList(data) {
+  const moviesEl = document.querySelector(".movies");
+  moviesEl.classList.remove('menu__table');
+  moviesEl.classList.add('menu__list');
+
+  moviesEl.innerHTML = "";
+
+  data.films.forEach((movie) => {
+    console.log(movie);
+    const movieEl = document.createElement("div");
+    movieEl.classList.add("movie__list");
+    movieEl.classList.add("popup_img");
+    movieEl.innerHTML = `
+        <div  class="movie__list card">
+          <div class="movie__cover--inner">
+              <img src='${movie.posterUrlPreview}' alt="${
+                  movie.nameRu
+              }" class="movie__cover">
+              <div class="movie__cover--darkened" data-id="${movie.filmId}"></div>
+          </div>
+          <div class="movie__info_list card">
+              <div class="movie__title_list">${movie.nameRu}</div>
+              <div class="movie__title_list_orig">${movie.nameEn}</div>
+              <div class="movie__year_list">год: ${movie.year}</div>  
+              <div class="movie__category_list">жанр: ${movie.genres.map((genre, index) => {
+                if (index < 3) {
+                  return `${genre.genre}`;
+                }
+              })}</div>
+               
+                <div class="movie__rating_list">Рейтинг Кинопоиска: ${movie.rating}</div>
+        </div>
+        `;
+    moviesEl.appendChild(movieEl);  
+  });
+}
+
+
+//=================создание карточек===============
 function showMovies(data) {
   const moviesEl = document.querySelector(".movies");
-  
+  moviesEl.classList.remove('menu__list');
+  moviesEl.classList.add('menu__table');
   moviesEl.innerHTML = "";
 
   data.films.forEach((movie) => {
@@ -81,14 +152,14 @@ function showMovies(data) {
     movieEl.classList.add("movie");
     movieEl.classList.add("popup_img");
     movieEl.innerHTML = `
-        <div  class="movie card">
+        <div  class="movie card" >
           <div class="movie__cover--inner">
               <img src='${movie.posterUrlPreview}' alt="${
                   movie.nameRu
               }" class="movie__cover">
               <div class="movie__cover--darkened" data-id="${movie.filmId}"></div>
           </div>
-          <div class="movie__info">
+          <div class="movie__info card" >
               <div class="movie__title">${movie.nameRu}</div>
               <div class="movie__category">${movie.genres.map((genre, index) => {
                 if (index < 3) {
@@ -117,10 +188,9 @@ const search = document.querySelector(".form__search");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const apiSearchUrl = `${API_URL_SEARCH}${search.value}`;
-  const titleSearch = document.querySelector('.title__films');
-  
+
   if (search.value) {
-    getMovies(apiSearchUrl);
+    getMovies(apiSearchUrl, showMovies);
     }
     titleSearch.innerHTML = `Результат поиска для: ${search.value}`;
     search.value = "";   
@@ -130,9 +200,12 @@ form.addEventListener("submit", (e) => {
 
 //модальное окно по клику на постер
 window.addEventListener("click", function (event) {
+  event.preventDefault();
+  console.log(event.target);
   if (event.target.closest('.card')) {
     const filmId = event.target.getAttribute('data-id');
     const filmItem = `${API_FILM_INFO}${filmId}`;
+    console.log(filmItem);
     getMovie(filmItem); 
   };
 });
