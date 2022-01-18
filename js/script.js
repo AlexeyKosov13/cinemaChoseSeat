@@ -35,50 +35,35 @@ function openNaw() {
 
 // ============слайдер==================
 
-/* Индекс слайда по умолчанию */
-let slideIndex = 1;
-showSlides(slideIndex);
+const swiper = new Swiper('.swiper', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
 
-/* Функция увеличивает индекс на 1, показывает следующй слайд*/
-function plusSlide() {
-    showSlides(slideIndex += 1);
-}
+    autoplay: {
+        delay: 3000,
+      },
+    
+  
+    // If we need pagination
+    pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+    },
+  
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  
+    // And if we need scrollbar
+    scrollbar: {
+        el: '.swiper-scrollbar',
+        draggable: true
+    },
+  });
 
-/* Функция уменьшяет индекс на 1, показывает предыдущий слайд*/
-function minusSlide() {
-    showSlides(slideIndex -= 1);  
-}
-
-/* Устанавливает текущий слайд */
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
-/* Основная функция слайдера */
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("item");
-    let dots = document.getElementsByClassName("slider-dots_item");
-    if (n > slides.length) {
-      slideIndex = 1
-    }
-    if (n < 1) {
-        slideIndex = slides.length
-    }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
-}
-
-let timer = setInterval(function(){
-    slideIndex++;
-    showSlides(slideIndex);
-}, 5000);
 
 //================================
 
@@ -184,12 +169,24 @@ prevBtn.addEventListener('click', () => {
 });
 
 
+//==========api news ===============
 
+// const API_KEY_NEWS = '76462a645a464a579a6272a4d1ac0fd2';
+// const API_NEWS = 'https://newsapi.org/v2/top-headlines?country=ru&category=entertainment&apiKey=';
 
+// getNews(API_NEWS + API_KEY_NEWS);
 
-
-// //====================popup==================
-
+// async function getNews(url) {
+//     const resp = await fetch(url, {
+//       method: "GET",
+//       headers: {
+//         "X-API-KEY": API_KEY_NEWS,
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     const respData = await resp.json();
+//     console.log(respData);
+// };
 
 
 

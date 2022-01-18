@@ -1,8 +1,7 @@
 const quizData = [
     {
         img: '/img/1.jpg',
-        img2: '/img/11.jpg',
-        
+        img2: '/img/11.jpg',    
         a: "Молчание ягнят",
         b: "Зеленая миля",
         c: "Побег из Шоушенка",
@@ -11,7 +10,6 @@ const quizData = [
     {
         img: '/img/2.jpg',
         img2: '/img/22.jpg',
-        
         a: "Карты, деньги, два ствола",
         b: "Достучаться до небес",
         c: "Большой куш",
@@ -19,8 +17,7 @@ const quizData = [
     },
     {
         img: '/img/3.jpg',
-        img2: '/img/33.jpg',
-        
+        img2: '/img/33.jpg',  
         a: "Техасская резня бензопилой",
         b: "Ночь в музее",
         c: "Остров проклятых",
@@ -28,8 +25,7 @@ const quizData = [
     },
     {
         img: '/img/4.jpg',
-        img2: '/img/44.jpg',
-        
+        img2: '/img/44.jpg',   
         a: "Назад в будущее 1",
         b: "Назад в будущее 2",
         c: "Назад в будущее 3",
@@ -37,14 +33,25 @@ const quizData = [
     },
     {
         img: '/img/5.jpg',
-        img2: '/img/55.jpg',
-        
+        img2: '/img/55.jpg', 
         a: "Одержимость",
         b: "Социальная сеть",
         c: "Человек-паук",
         correct: "a",
     },
 ];
+
+// class Movie {
+//     constructor(img,img2,a,b,c,correct){
+//         this.img = img,
+//         this.img2 = img2,
+//         this.a - a,
+//         this.b = b,
+//         this.c = c,
+//         this.correct = correct,
+//     }
+// }
+
 
 const quiz = document.getElementById('quiz');
 const answerElements = document.querySelectorAll('.answer');

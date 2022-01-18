@@ -103,14 +103,13 @@ buttonTable.addEventListener('click', () => {
 
 
 function showMoviesList(data) {
-  const moviesEl = document.querySelector(".movies");
+  const moviesEl = document.querySelector('.movies');
   moviesEl.classList.remove('menu__table');
   moviesEl.classList.add('menu__list');
 
   moviesEl.innerHTML = "";
 
   data.films.forEach((movie) => {
-    console.log(movie);
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie__list");
     movieEl.classList.add("popup_img");
@@ -152,14 +151,14 @@ function showMovies(data) {
     movieEl.classList.add("movie");
     movieEl.classList.add("popup_img");
     movieEl.innerHTML = `
-        <div  class="movie card" >
-          <div class="movie__cover--inner">
+        <div  class="movie " >
+          <div class="movie__cover--inner card">
               <img src='${movie.posterUrlPreview}' alt="${
                   movie.nameRu
-              }" class="movie__cover">
+              }" class="movie__cover ">
               <div class="movie__cover--darkened" data-id="${movie.filmId}"></div>
           </div>
-          <div class="movie__info card" >
+          <div class="movie__info" >
               <div class="movie__title">${movie.nameRu}</div>
               <div class="movie__category">${movie.genres.map((genre, index) => {
                 if (index < 3) {
@@ -197,11 +196,10 @@ form.addEventListener("submit", (e) => {
 });
 
 //====================popup==================
-
+const moviesEl = document.querySelector(".movies");
 //модальное окно по клику на постер
-window.addEventListener("click", function (event) {
+moviesEl.addEventListener("click", function (event) {
   event.preventDefault();
-  console.log(event.target);
   if (event.target.closest('.card')) {
     const filmId = event.target.getAttribute('data-id');
     const filmItem = `${API_FILM_INFO}${filmId}`;
