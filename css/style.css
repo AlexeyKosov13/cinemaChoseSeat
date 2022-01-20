@@ -112,6 +112,7 @@ body {
 
 main {
   display: block;
+  
 }
 
 /**
@@ -857,7 +858,7 @@ select option {
   font-weight: 700;
   color: #fff;
   text-decoration: none;
-  padding: 24px 52px 24px;
+  padding: 16px 42px 16px;
   background-color: #FE8E05;
   border-radius: 5px;
 }
@@ -870,7 +871,7 @@ select option {
 
 .swiper {
   max-width: 900px;
-  max-height: 500px;
+  max-height: 600px;
   margin-bottom: 60px;
 }
 .swiper-slide {
@@ -886,9 +887,16 @@ select option {
   position: absolute;
   z-index: 5;
   top: 70px;
-  left: 40px;
-  max-width: 400px;
-  
+  left: 50px;
+  max-width: 400px; 
+}
+.swiper-button-next {
+  color: #fff;
+  opacity: 0.3;
+}
+.swiper-button-prev {
+  color: #fff;
+  opacity: 0.3;
 }
 
 
@@ -923,21 +931,18 @@ select option {
 }
 .movie__list {
   display: flex;
-  flex-direction: row;
-  min-width: 300px;
+  flex-direction: row;  
   margin-bottom: 20px;
   background-color: #fff;
-  padding: 10px;
-  
-  width: 800px;
-  
+  padding: 10px; 
 }
 .movie__cover--inner {
   position: relative;
   height: 360px;
 }
 .movie__cover {
-  max-width: 100%;
+  max-width: 240px;
+  width: 100%;
   height: 100%;
 }
 .movie__cover--darkened {
@@ -970,6 +975,7 @@ select option {
   flex-direction: column;
   justify-content: center;
   padding: 8px 40px;
+  max-width: 240px;
 
 }
 .movie__title {
@@ -1249,20 +1255,22 @@ height: 100%;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
-  max-width: 550px;
+  max-width: 450px;
   margin-right: 10px;
   margin-left: 10px;
-  min-height: 300px;
+  min-height: 200px;
   align-items: center;
 }
 .news__left_block {
-  width: 300px;
+  max-width: 40%;
   margin-right: 20px;
 }
 .news__img {
-  max-width: 250px;
+  max-width: 100%;
+
 }
 .news__right_block {
+  max-width: 60%;
 }
 .news__date {
   font-size: 12px;
@@ -1482,6 +1490,7 @@ height: 100%;
 }
 .premier {
   position: relative;
+  margin-bottom: 30px;
 }
 .premier__btn_next {
   font-weight: 700;
@@ -1682,17 +1691,9 @@ text-decoration: none;
     border-radius: 10px;
   }
 
-  .slideText {
-    font-size: 14px;
-    /* Выравнивание текста по горизонтали и по вертикали*/
-    left: 50%;
-    top: 50%;
-    width: 70%;
-    transform: translate(-50%, -50%); 
-  }
   .button-pay {   
     font-size: 16px;
-    padding: 10px 20px;
+    padding: 7px 15px;
   }
   .premier__title {
     text-align: center;
@@ -1711,9 +1712,16 @@ text-decoration: none;
     width: 200px;
     margin: 6px;  
   }
+  .movie__list {
+    display: flex;
+    flex-direction: column;
+
+  }
   .movie__cover--inner {
-    position: relative;
-    height: 320px;
+    max-width: 240px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
   }
 
   .modalWindow {  
@@ -1745,8 +1753,21 @@ text-decoration: none;
   .text_title_original {
     margin-bottom: 10px;
   }
- 
-  
+  .slideText {
+    top: 20px;
+  }
+  .slide-title {
+    font-size: 16px;
+  }
+  .slide-subtitle {
+    font-size: 14px;
+  } 
+  .button__panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+
 }
 
 
@@ -1772,20 +1793,26 @@ text-decoration: none;
     height: 300px;
     border-radius: 10px;
   }
+  .movie__cover--inner {
+    max-width: 240px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+  
 
-  .slideText {
+  .slide-title {
     font-size: 14px;
-    /* Выравнивание текста по горизонтали и по вертикали*/
-    left: 50%;
-    top: 50%;
-    width: 70%;
-    transform: translate(-50%, -50%); 
+  }
+  .slide-subtitle {
+    font-size: 10px;
   }
   .button-pay {   
-    font-size: 16px;
-    padding: 10px 20px;
+    font-size: 12px;
+    padding: 6px 10px;
   }
   .premier__title {
+    margin: 0;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -1799,7 +1826,18 @@ text-decoration: none;
   .title__films{
     font-size: 18px;
   }
+  .movie__list {
+    display: flex;
+    flex-direction: column;
 
+  }
+  .menu__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
   .modalWindow {  
     padding-top: 10px;
     padding-bottom: 10px; 
@@ -1830,6 +1868,27 @@ text-decoration: none;
   .text_title_original {
     margin-bottom: 10px;
   }
+
+  .title__news {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  .news__title {
+    
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .news__description {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .news__url_span {
+    font-size: 12;
+  }
+  .news__url {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 320px) {
@@ -1841,10 +1900,7 @@ text-decoration: none;
     width: 90%;
     transform: translate(-50%, -50%); 
   }
-  .button-pay {   
-    font-size: 14px;
-    padding: 5px 10px;
-  }
+  
   .button__panel {
     flex-direction: column;
   }
