@@ -1943,18 +1943,18 @@ text-decoration: none;
   .button__table {
     width: 40px;
     height: 40px;
-    background: url("/img/buttonTable.png") center / 80% no-repeat #eee;
+    background: url("img/buttonTable.png") center / 80% no-repeat #eee;
     cursor: pointer;
   }
   .button__table:hover {
-   background: url("/img/buttonTable.png") center / 80% no-repeat rgb(107, 104, 104);
+   background: url("img/buttonTable.png") center / 80% no-repeat rgb(107, 104, 104);
   }
   .button__list {
     width: 40px;
     height: 40px; 
-    background: url("/img/buttonLIst.png") center / 80% no-repeat #eee;
+    background: url("img/buttonLIst.png") center / 80% no-repeat #eee;
     cursor: pointer;
   }
   .button__list:hover {
-    background: url("/img/buttonLIst.png") center / 80% no-repeat rgb(107, 104, 104);
+    background: url("img/buttonLIst.png") center / 80% no-repeat rgb(107, 104, 104);
   }
