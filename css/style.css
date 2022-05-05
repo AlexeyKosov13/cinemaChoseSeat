@@ -1074,6 +1074,11 @@ select option {
   text-align: center;
 
 }
+
+.start-form {
+  color:#000;
+}
+
 .start-name {
   font-size: 18px;
   margin: 10px;
@@ -1092,6 +1097,10 @@ select option {
   position: absolute;
   top: -99999px;
   left: -99999px;
+}
+
+.quiz-timer {
+  color:#000;
 }
 
 .quiz-box{
@@ -1141,6 +1150,11 @@ ul li label{
 .button_game:focus{
   outline: none;
   background-color: #5ec6eb;
+}
+
+.btn-againGame {
+  display: inline-block;
+  width: 200px;
 }
 
 .question-img {
@@ -1222,6 +1236,7 @@ height: 100%;
   width: 400px;
   height: 500px;
   padding: 20px;
+  align-items: center;
 
 }
 .top-title {
@@ -1237,16 +1252,15 @@ height: 100%;
 }
 .result {
   font-size: 24px;
+  color: #000;
 }
 
-
-.news {
-}
 .title__news {
   font-size: 24px;
   margin-bottom: 40px;
   margin-left: 40px;
 }
+
 .news__block {
   display: flex;
   flex-wrap: wrap;
@@ -1254,8 +1268,8 @@ height: 100%;
   margin-right: -10px;
   margin-left: -10px;
   justify-content: center;
-
 }
+
 .news__item {
   background-color: #fff;
   display: flex;
@@ -1268,62 +1282,69 @@ height: 100%;
   min-height: 200px;
   align-items: center;
 }
+
 .news__left_block {
   max-width: 40%;
   margin-right: 20px;
 }
+
 .news__img {
   max-width: 100%;
-
 }
+
 .news__right_block {
   max-width: 60%;
 }
+
 .news__date {
   font-size: 12px;
   color: #888;
   margin-bottom: 10px;
 }
+
 .news__title {
   font-size: 18px;
   color: #000;
   margin-bottom: 20px;
 }
+
 .news__description {
   font-size: 16px;
   color: #000;
   margin-bottom: 20px;
 }
+
 .news__url_block {
 }
+
 .news__url_span {
   font-size: 14px;
   color: #888;
 }
+
 .news__url {
   font-size: 16px;
   color: #000;
 }
 
-
-
 @media only screen and (min-width : 480px) and (max-width : 740px) {
   .quiz-box {
       width: 95%;
       border-radius: 4px;
-
   }
+
   .question-img {
       width: 95%;
       height: 250px;
   }
 }
+
 @media only screen and (min-width : 320px) and (max-width : 480px) {
   .quiz-box {
       width: 95%;
       border-radius: 4px;
-
   }
+
   .question-img {
       width: 95%;
       height: 250px;
@@ -1341,7 +1362,6 @@ height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 
 .modal-content {
   display: flex;
@@ -1838,6 +1858,7 @@ text-decoration: none;
     height: 300px;
     border-radius: 10px;
   }
+
   .movie__cover--inner {
     max-width: 240px;
     display: block;
@@ -1846,20 +1867,20 @@ text-decoration: none;
     position: relative;
     height: 180px;
   }
- 
- 
-  
 
   .slide-title {
     font-size: 14px;
   }
+
   .slide-subtitle {
     font-size: 10px;
   }
+
   .button-pay {   
     font-size: 12px;
     padding: 6px 10px;
   }
+
   .premier__title {
     margin: 0;
     text-align: center;

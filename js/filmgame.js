@@ -168,14 +168,10 @@ function startGame() {
                 else {
                     quiz.style.display = 'none';
                     tableBox.style.display = 'flex';
-                    //result.innerHTML = `Вы ответили на ${score}/${quizData.length} вопросов`;
-                    tableBox.innerHTML += `<button onclick="location.reload()">Играть еще</button>`;
+                    result.innerHTML = `Вы ответили на ${score}/${quizData.length} вопросов`;
+                    tableBox.innerHTML += `<button onclick="location.reload()" class = "btn-againGame">Играть еще</button>`;
                     localStorage.setItem(gamer, score);
                     
-                    // li.innerHTML = `<h2>hello</h2>`;
-                    // console.log(li);
-                    // li.classList.add('list-item');
-                    // topGamer.appendChild(li);
                     let keys = Object.keys(localStorage);
                     console.log(keys);
                     keys.forEach((key, i) => {
