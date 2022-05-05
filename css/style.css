@@ -906,21 +906,24 @@ select option {
   text-decoration: none;
   display: inline-block;
 }
+
 .menu__list{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .menu__table{
   display: flex;
-  flex-direction: row;
-  
+  flex-direction: row; 
 }
+
 .movies {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
 .movie {
   display: flex;
   position: relative;
@@ -929,13 +932,17 @@ select option {
   width: 240px;
   margin: 10px;  
 }
-.movie__list {
+
+.movie__card {
+  min-width: 600px;
   display: flex;
   flex-direction: row;  
   margin-bottom: 20px;
   background-color: #fff;
-  padding: 10px; 
+  padding: 10px;
 }
+
+
 .movie__cover--inner {
   position: relative;
   height: 360px;
@@ -1323,11 +1330,10 @@ height: 100%;
   }
 }
 
-.modalWindow {
-  
+.modalWindow { 
   position: fixed;
   z-index: 9;
-  padding-top: 100px;
+  padding-top: 50px;
   left: 0;
   top: 0;
   width: 100%;
@@ -1335,6 +1341,7 @@ height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 
 .modal-content {
   display: flex;
@@ -1766,8 +1773,33 @@ text-decoration: none;
     display: flex;
     flex-direction: column;
   }
+  .movie__card {
+    min-width: 400px;
+    display: flex;
+    flex-direction: row;  
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 5px;
+  }
 
+  .movie__cover--inner {
+    position: relative;
+    height: 260px;
+  }
 
+}
+
+.search-btn {
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px;
+  border: 1px solid gray;
+}
+
+.search-btn:hover {
+  background-color:rgb(107, 104, 104);
 }
 
 
@@ -1790,7 +1822,17 @@ text-decoration: none;
     height: 300px;
     margin-bottom: 15px;
   }
-  /* Картинка мастабируется по отношению к родительскому элементу */
+
+  .movie__card {
+    min-width: 300px;
+    display: flex;
+    flex-direction: row;  
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 5px;
+  }
+
+  /* Картинка маштабируется по отношению к родительскому элементу */
   .slider .item img {
     width: 100%;
     height: 300px;
@@ -1801,7 +1843,11 @@ text-decoration: none;
     display: block;
     margin: 0 auto;
     margin-bottom: 10px;
+    position: relative;
+    height: 180px;
   }
+ 
+ 
   
 
   .slide-title {
@@ -1862,10 +1908,10 @@ text-decoration: none;
   }
   
   .popup_text {
-    
     width: 300px;
     height: auto;
     margin: 5px;
+    padding-bottom: 20px;
   }
   
   .text_title_original {

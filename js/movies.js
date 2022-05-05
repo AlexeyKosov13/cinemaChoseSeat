@@ -33,6 +33,9 @@ async function getMovie(url) {
   showModal(respData);
 };
 
+// =======поиск фильмов онлайн в яндексе ======
+const searchOnline = document.querySelector('.searchOnline');
+
 //========выбор списков=============
 const topList = document.querySelector('.top__list');
 topList.addEventListener('change', () => {
@@ -101,6 +104,7 @@ buttonTable.addEventListener('click', () => {
   getMovies(API_URL_POULAR + pageNum, showMovies);
 })
 
+//==============расположените списком =============
 
 function showMoviesList(data) {
   const moviesEl = document.querySelector('.movies');
@@ -114,16 +118,18 @@ function showMoviesList(data) {
     movieEl.classList.add("movie__list");
     movieEl.classList.add("popup_img");
     movieEl.innerHTML = `
-        <div  class="movie__list card">
-          <div class="movie__cover--inner">
+        <div  class="movie__card ">
+          <div class="movie__cover--inner card">
               <img src='${movie.posterUrlPreview}' alt="${
                   movie.nameRu
               }" class="movie__cover">
               <div class="movie__cover--darkened" data-id="${movie.filmId}"></div>
           </div>
-          <div class="movie__info_list card">
+          <div class="movie__info_list">
               <div class="movie__title_list">${movie.nameRu}</div>
-              <div class="movie__title_list_orig">${movie.nameEn}</div>
+              <div class="movie__title_list_orig">${
+                movie.nameEn !== null?`<div>${movie.nameEn}</div>`:''              
+                }</div>
               <div class="movie__year_list">год: ${movie.year}</div>  
               <div class="movie__category_list">жанр: ${movie.genres.map((genre, index) => {
                 if (index < 3) {
@@ -134,7 +140,8 @@ function showMoviesList(data) {
                 <div class="movie__rating_list">Рейтинг Кинопоиска: ${movie.rating}</div>
         </div>
         `;
-    moviesEl.appendChild(movieEl);  
+    moviesEl.appendChild(movieEl); 
+    console.log(movie); 
   });
 }
 
@@ -203,13 +210,15 @@ moviesEl.addEventListener("click", function (event) {
   if (event.target.closest('.card')) {
     const filmId = event.target.getAttribute('data-id');
     const filmItem = `${API_FILM_INFO}${filmId}`;
-    console.log(filmItem);
     getMovie(filmItem); 
   };
 });
 
 //рендер модального окна
 function showModal(item) {
+  const body = document.querySelector('body');
+  const search = document.querySelector('.searchFilm');
+  const searchTrailer = document.querySelector('.searchTrailer');
   const modal = document.querySelector('.modalWindow');
   const closeBtn = document.querySelector('.close_btn');
   const poster = document.querySelector('.modal_poster');
@@ -219,8 +228,10 @@ function showModal(item) {
   const description = document.querySelector('.text_description');
   const genre = document.querySelector('.text_genre');
   const year = document.querySelector('.text_year');
+
   modal.classList.remove('hide');
   modal.classList.add('show');
+  body.style.overflow = 'hidden';
   let genresList = item.genres.map((genre, index) => {
     if (index < 3) {
         return `${genre.genre}`;
@@ -233,23 +244,29 @@ function showModal(item) {
   description.innerHTML = item.description;
   genre.innerHTML = genresList;
   year.innerHTML = item.year;
+  search.href = `https://yandex.ru/search/?lr45&text=${item.nameRu}+смотреть+онлайн+lordfilm`;
+  searchTrailer.href = `https://www.youtube.com/results?search_query=трейлер+${item.nameRu}`;
+  
   //закрытие модального окна
   closeBtn.addEventListener('click', () => {
     modal.classList.remove('show');
-    modal.classList.add('hide');   
+    modal.classList.add('hide');
+    body.style.overflow = 'visible';   
   }); 
   modal.addEventListener("click", (e) => {
     // закрытие по щелчку на пустом поле
     if (e.target === modal) {
       modal.classList.remove('show');
-      modal.classList.add('hide');     
+      modal.classList.add('hide');
+      body.style.overflow = 'visible';        
     }
   }); 
   document.addEventListener("keydown", (e) => {
     // закрытие клавишей escape
     if (e.code === "Escape") {
       modal.classList.remove('show');
-      modal.classList.add('hide');    
+      modal.classList.add('hide'); 
+      body.style.overflow = 'visible';      
     }
   });  
 };
@@ -268,6 +285,8 @@ function openNaw() {
 }
 
   
+//================yandex search==================
 
 
 
+// https://yandex.ru/search/?text=поисковый+запрос+в+яндексе+как+вышлядит&lr=45&clid=2270455&win=530
