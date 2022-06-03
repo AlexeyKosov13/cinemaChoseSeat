@@ -945,7 +945,6 @@ select option {
 
 .movie__cover--inner {
   position: relative;
-  height: 360px;
 }
 .movie__cover {
   max-width: 240px;
@@ -1747,8 +1746,6 @@ text-decoration: none;
   .movie__cover--inner {
     max-width: 240px;
     display: block;
-    margin: 0 auto;
-    margin-bottom: 10px;
   }
 
   .modalWindow {  
@@ -1804,7 +1801,6 @@ text-decoration: none;
 
   .movie__cover--inner {
     position: relative;
-    height: 260px;
   }
 
 }
@@ -1862,10 +1858,7 @@ text-decoration: none;
   .movie__cover--inner {
     max-width: 240px;
     display: block;
-    margin: 0 auto;
-    margin-bottom: 10px;
     position: relative;
-    height: 180px;
   }
 
   .slide-title {
